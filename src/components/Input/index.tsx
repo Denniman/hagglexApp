@@ -4,7 +4,7 @@ import { IconNigeria } from '../../assets/icons';
 interface InputTextProps {
   id: string;
   placeholder: string;
-  label: string;
+  label?: string;
 }
 
 export const InputText: React.FC<InputTextProps> = ({

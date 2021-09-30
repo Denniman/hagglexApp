@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 interface ButtonProps {
   text: string;
+  className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ text }) => {
-  return <Container>{text}</Container>;
+const Button: React.FC<ButtonProps> = ({ text, className }) => {
+  return <Container className={className}>{text}</Container>;
 };
 
 const Container = styled.button`
