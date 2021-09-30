@@ -17,6 +17,5 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: rgb(39, 17, 96);
-  background: linear-gradient(0deg, rgba(39, 17, 96, 1) 0%); */
+  background-color: #f2f5f4;
 }

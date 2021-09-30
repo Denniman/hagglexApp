@@ -19,6 +19,20 @@ export const InputText: React.FC<InputTextProps> = ({
     </Container>
   );
 };
+export const InputTextDashboard: React.FC<InputTextProps> = ({
+  id,
+  placeholder,
+  label,
+}) => {
+  return (
+    <DasboardWrapper>
+      <label className="dashboardlabel" htmlFor={id}>
+        {label}
+      </label>
+      <input type="text" placeholder={placeholder} className="input" id={id} />
+    </DasboardWrapper>
+  );
+};
 
 export const InputEmail: React.FC<InputTextProps> = ({
   id,
@@ -111,9 +125,46 @@ const NumberContainer = styled.div`
     }
   }
 `;
+const DasboardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .dashboardlabel {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .input-wrapper {
+    display: flex;
+  }
+  label {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .input {
+    padding: 1.5rem 1.5rem;
+    border-radius: 0.7rem;
+    border: none;
+    border: 2px solid #dadada;
+
+    :focus {
+      outline: none;
+    }
+
+    ::placeholder {
+      font-size: 1.3rem;
+      background-color: #fff;
+    }
+  }
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  .dashboardlabel {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
 
   .input-wrapper {
     display: flex;
