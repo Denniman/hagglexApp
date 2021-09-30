@@ -5,17 +5,31 @@ interface InputTextProps {
   id: string;
   placeholder: string;
   label?: string;
+  name?: string;
+  onChange?: (arg: any) => void;
+  required?: any;
 }
 
 export const InputText: React.FC<InputTextProps> = ({
   id,
   placeholder,
   label,
+  name,
+  onChange,
+  required,
 }) => {
   return (
     <Container>
       <label htmlFor={id}>{label}</label>
-      <input type="text" placeholder={placeholder} className="input" id={id} />
+      <input
+        type="text"
+        placeholder={placeholder}
+        className="input"
+        id={id}
+        name={name}
+        onChange={onChange}
+        required={required}
+      />
     </Container>
   );
 };
@@ -23,13 +37,24 @@ export const InputTextDashboard: React.FC<InputTextProps> = ({
   id,
   placeholder,
   label,
+  onChange,
+  name,
+  required,
 }) => {
   return (
     <DasboardWrapper>
       <label className="dashboardlabel" htmlFor={id}>
         {label}
       </label>
-      <input type="text" placeholder={placeholder} className="input" id={id} />
+      <input
+        type="text"
+        placeholder={placeholder}
+        className="input"
+        id={id}
+        onChange={onChange}
+        name={name}
+        required={required}
+      />
     </DasboardWrapper>
   );
 };
@@ -38,11 +63,22 @@ export const InputEmail: React.FC<InputTextProps> = ({
   id,
   placeholder,
   label,
+  onChange,
+  name,
+  required,
 }) => {
   return (
     <Container>
       <label htmlFor={id}>{label}</label>
-      <input type="email" placeholder={placeholder} className="input" id={id} />
+      <input
+        type="email"
+        placeholder={placeholder}
+        className="input"
+        id={id}
+        onChange={onChange}
+        name={name}
+        required={required}
+      />
     </Container>
   );
 };
@@ -50,6 +86,9 @@ export const InputPassword: React.FC<InputTextProps> = ({
   id,
   placeholder,
   label,
+  onChange,
+  name,
+  required,
 }) => {
   return (
     <Container>
@@ -59,6 +98,9 @@ export const InputPassword: React.FC<InputTextProps> = ({
         placeholder={placeholder}
         className="input"
         id={id}
+        onChange={onChange}
+        name={name}
+        required={required}
       />
     </Container>
   );
@@ -68,6 +110,9 @@ export const PhoneNumberInput: React.FC<InputTextProps> = ({
   id,
   label,
   placeholder,
+  onChange,
+  name,
+  required,
 }) => {
   return (
     <NumberContainer>
@@ -84,6 +129,9 @@ export const PhoneNumberInput: React.FC<InputTextProps> = ({
           placeholder={placeholder}
           className="input"
           id={id}
+          onChange={onChange}
+          name={name}
+          required={required}
         />
       </div>
     </NumberContainer>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
@@ -8,18 +9,47 @@ import {
   PhoneNumberInput,
 } from '../../components/Input';
 import Button from '../../components/Button';
-// import PhoneNumberInput from '../../components/PhoneNumberInput';
 
 const SignUp = () => {
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+    phonenumber: '',
+    username: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.persist();
+    setValues((values: any) => ({
+      ...values,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const userData = {
+      email: values.email,
+      password: values.password,
+      phonenumber: values.phonenumber,
+      username: values.username,
+    };
+
+    console.log(userData);
+  };
+
   return (
     <Layout>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <h2>Create new account</h2>
         <div className="form--control first">
           <InputEmail
             id="email"
             label="Email Address"
             placeholder="example@mail.com"
+            name="email"
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="form--control">
@@ -27,6 +57,9 @@ const SignUp = () => {
             id="password"
             label="Password"
             placeholder="*****************"
+            name="password"
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="form--control">
@@ -34,6 +67,9 @@ const SignUp = () => {
             placeholder="Chrissteve"
             label="Create username"
             id="username"
+            name="username"
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="form--control">
@@ -41,6 +77,9 @@ const SignUp = () => {
             label="Enter your phone number"
             placeholder="813 000 0000"
             id="phonenumber"
+            name="phonenumber"
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="forgot--password">

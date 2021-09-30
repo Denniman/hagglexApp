@@ -4,9 +4,13 @@ import Layout from '../../components/Layout';
 import { InputTextDashboard } from '../../components/Input';
 
 const VerifyUser = () => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <Layout>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <h2>Please verify your email</h2>
         <div className="form--control">
           <InputTextDashboard placeholder="Enter token" id="otp" />

@@ -1,188 +1,81 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import LoginImg from '../../assets/images/login-img.png';
-import FormImg from '../../assets/images/formbg.png';
-import ImageBG from '../../assets/images/imgbg.png';
-import { IconBack, IconForward } from '../../assets/icons';
 import { InputEmail, InputPassword } from '../../components/Input';
 import Button from '../../components/Button';
+import Layout from '../../components/Layout';
 
 const Login = () => {
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.persist();
+    setValues((values: any) => ({
+      ...values,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const userData = {
+      email: values.email,
+      password: values.password,
+    };
+
+    console.log(userData);
+  };
+
   return (
-    <Container>
-      <ImageSection>
-        <div className="image--wrapper">
-          <Image src={LoginImg} alt="house" />
-          <div className="image-text">
-            <HeadingPrimary>Trade Globally</HeadingPrimary>
-            <TextPrimary>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
-              magnam vero voluptatem.
-            </TextPrimary>
+    <Layout>
+      <Form onSubmit={handleSubmit}>
+        <h2>Welcome Back</h2>
+        <div className="form--control first">
+          <InputEmail
+            id="email"
+            label="Email Address"
+            name="email"
+            placeholder="example@mail.com"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form--control">
+          <InputPassword
+            id="password"
+            label="Password"
+            name="password"
+            placeholder="*****************"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="forgot--password">
+          <Text>Forgot password?</Text>
+        </div>
+        <div className="button--wrapper">
+          <Button text="SIGN IN" />
+        </div>
 
-            <div className="image-text--scroll">
-              <button className="forwardbtn">
-                <IconForward />
-              </button>
+        <div className="newuser">
+          <LinkText to="/register">
+            <TextSecondary>New User?</TextSecondary>
+            Sign Up to get started
+          </LinkText>
+        </div>
 
-              <div className="image-text--scroll_btns">
-                <div className="circlebtn active"></div>
-                <div className="circlebtn"></div>
-                <div className="circlebtn"></div>
-              </div>
-              <button className="forwardbtn">
-                <IconBack className="icon" />
-              </button>
-            </div>
+        <div className="privacy">
+          <Text>Need help?</Text>
+          <div className="privacy--terms">
+            <p>Privacy</p>
+            <p>Terms & Policy</p>
           </div>
         </div>
-      </ImageSection>
-      <FormSection>
-        <div className="form--wrapper">
-          <Form>
-            <h2>Welcome Back</h2>
-            <div className="form--control first">
-              <InputEmail
-                id="email"
-                label="Email Address"
-                placeholder="example@mail.com"
-              />
-            </div>
-            <div className="form--control">
-              <InputPassword
-                id="password"
-                label="Password"
-                placeholder="*****************"
-              />
-            </div>
-            <div className="forgot--password">
-              <Text>Forgot password?</Text>
-            </div>
-            <div className="button--wrapper">
-              <Button text="SIGN IN" />
-            </div>
-
-            <div className="newuser">
-              <LinkText to="/register">
-                <TextSecondary>New User?</TextSecondary>
-                Sign Up to get started
-              </LinkText>
-            </div>
-
-            <div className="privacy">
-              <Text>Need help?</Text>
-              <div className="privacy--terms">
-                <p>Privacy</p>
-                <p>Terms & Policy</p>
-              </div>
-            </div>
-          </Form>
-        </div>
-      </FormSection>
-    </Container>
+      </Form>
+    </Layout>
   );
 };
-
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-`;
-
-const ImageSection = styled.section`
-  width: 100%;
-  height: 100vh;
-  padding: 0 2rem;
-  order: 2;
-  background-image: url(${FormImg});
-  @media (min-width: 768px) {
-    width: 55%;
-    order: 1;
-  }
-
-  .image--wrapper {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-  }
-
-  .image-text {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 50%;
-  }
-
-  .image-text--scroll {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
-
-    &_btns {
-      display: flex;
-      gap: 1rem;
-    }
-  }
-
-  .circlebtn {
-    width: 7px;
-    min-width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    opacity: 0.5;
-    background-color: #b395ff;
-  }
-
-  .active {
-    opacity: 1;
-  }
-
-  .forwardbtn {
-    background-color: transparent;
-    outline: none;
-    border: none;
-  }
-`;
-
-const FormSection = styled.section`
-  width: 100%;
-  height: 100vh;
-  padding: 0 2rem;
-  background-image: url(${ImageBG});
-  background-repeat: no-repeat;
-  background-size: cover;
-  order: 1;
-
-  @media (min-width: 768px) {
-    width: 45%;
-    order: 2;
-  }
-
-  .form--wrapper {
-    margin: 4rem auto;
-  }
-`;
-
-const Image = styled.img`
-  width: 50%;
-`;
-
-const HeadingPrimary = styled.h2`
-  color: #fff;
-`;
-
-const TextPrimary = styled.p`
-  color: #fff;
-  font-size: 1.3rem;
-`;
 
 const Form = styled.form`
   background-color: #fff;
@@ -190,7 +83,7 @@ const Form = styled.form`
   padding: 8rem 5rem;
   margin: 0;
   @media (min-width: 768px) {
-    margin: 0 5rem;
+    margin: 5rem;
   }
 
   .first {
