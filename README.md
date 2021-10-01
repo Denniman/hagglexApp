@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## PLEASE NOTE
 
-The password reset does not work at this moment due to some authorization response I'm getting from the server, so you might want to visit the [/login] route and sign in when redirected to verification page or use this details to sign in
+The password reset does not work at this moment due to some authorization response I'm getting from the server, so you might want to visit the login route and sign in when redirected to verification page or use this details to sign in;
 password: 12345678
 Email: anakate@yopmail.com
 
