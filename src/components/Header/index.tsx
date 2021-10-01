@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import PolyGon from '../../assets/images/Polygon.png';
 import BellIcon from '../../assets/images/bell.png';
-import { SidebarContext } from '../../context';
+import { AppContext } from '../../context';
 
 const Header = () => {
   const [show, SetShow] = useState(false);
 
-  const toggleSidebar = useContext(SidebarContext);
+  const toggleSidebar = useContext(AppContext);
 
   const toggleShow = () => {
     SetShow((prev) => !prev);

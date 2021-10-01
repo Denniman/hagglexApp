@@ -1,28 +1,35 @@
 import { useState, createContext, ReactNode } from 'react';
 
-type SideBarToggleProp = {
+type ContextProps = {
   sidebar: boolean;
   handleSidebar: () => void;
+  user: { token: string };
+  handleUserAuth: (data: object) => void;
 };
 
 interface PropType {
   children: ReactNode;
 }
 
-export const SidebarContext = createContext<SideBarToggleProp | null>(null);
+export const AppContext = createContext<ContextProps | null>(null);
 
-const SideBarContextProvider: React.FC<PropType> = ({ children }) => {
+const AppContextProvider: React.FC<PropType> = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [user, setUser] = useState({ token: '' });
 
   const handleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
+  const handleUserAuth = (data: object) => setUser({ ...user, ...data });
+
   return (
-    <SidebarContext.Provider value={{ sidebar: showSidebar, handleSidebar }}>
+    <AppContext.Provider
+      value={{ sidebar: showSidebar, handleSidebar, user, handleUserAuth }}
+    >
       {children}
-    </SidebarContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export default SideBarContextProvider;
+export default AppContextProvider;

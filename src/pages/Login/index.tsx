@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import { InputEmail, InputPassword } from '../../components/Input';
+import { AppContext } from '../../context';
 
 import { Form, Text, LinkText, TextSecondary } from './styles';
 
@@ -11,7 +13,9 @@ const LOGIN = gql`
     login(data: $payload) {
       user {
         _id
-        name
+        email
+        username
+        emailVerified
       }
       token
     }
@@ -20,6 +24,11 @@ const LOGIN = gql`
 
 const Login = () => {
   const [values, setValues] = useState({ email: '', password: '' });
+
+  const authuser = useContext(AppContext);
+
+  const history = useHistory();
+
   const [login, { data, loading, error }] = useMutation(LOGIN);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,14 +38,23 @@ const Login = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    login({ variables: { payload: { ...values, input: values.email } } });
+    login({
+      variables: {
+        payload: { password: values.password, input: values.email },
+      },
+    });
   };
 
   useEffect(() => {
     if (!error && data) {
-      //route user
+      authuser?.handleUserAuth(data.login);
+      history.push('/dashboard');
     }
-  }, [data, error]);
+
+    if (error) {
+      console.log('error occured');
+    }
+  }, [authuser, history, data, error]);
 
   return (
     <Layout>

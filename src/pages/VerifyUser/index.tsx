@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { gql, useMutation } from '@apollo/client';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import { InputNumber } from '../../components/Input';
+import { AppContext } from '../../context';
 
 const VERIFY = gql`
   mutation verifyUser($payload: VerifyUserInput!) {
@@ -24,6 +25,8 @@ const VerifyUser = () => {
   const [code, setCode] = useState('');
   const [verify, { data, loading, error }] = useMutation(VERIFY);
 
+  const authUser = useContext(AppContext);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
     setCode(e.target.value);
@@ -36,12 +39,13 @@ const VerifyUser = () => {
 
   useEffect(() => {
     if (!error && data) {
-      console.log(data);
+      authUser?.handleUserAuth(data.login);
       history.push('/dashboard');
-    } else {
-      console.log('error occured', error);
     }
-  }, [history, data, error]);
+
+    if (error) {
+    }
+  }, [authUser, history, data, error]);
 
   return (
     <Layout>

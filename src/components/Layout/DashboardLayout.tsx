@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { SidebarContext } from '../../context';
+import { AppContext } from '../../context';
 import Sidebar from '../../components/SideBar';
 
 const DashboardLayout: React.FC = ({ children }) => {
-  const toggleSidebar = useContext(SidebarContext);
+  const toggleSidebar = useContext(AppContext);
 
   return (
     <DashboardContainer>

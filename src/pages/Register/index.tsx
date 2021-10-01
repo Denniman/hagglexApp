@@ -51,10 +51,11 @@ const Register = () => {
 
   useEffect(() => {
     if (!error && data) {
-      console.log(data);
       history.push('/verify-user');
-    } else {
-      console.log('error occured', error);
+    }
+
+    if (error) {
+      console.log('error');
     }
   }, [history, data, error]);
 

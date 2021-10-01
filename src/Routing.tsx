@@ -5,10 +5,12 @@ import {
   RouteComponentProps,
   Redirect,
 } from 'react-router-dom';
+import { useContext } from 'react';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import VerifyUser from './pages/VerifyUser';
+import { AppContext } from './context';
 
 type FF = {
   isAuthenticated: boolean;
@@ -38,14 +40,15 @@ const PrivateRoute: React.FC<FF> = ({
 };
 
 const Routing = () => {
-  const isAuthenticated = true;
+  const authUser = useContext(AppContext);
+
   return (
     <Router>
       <Switch>
         <PrivateRoute
           exact
-          isAuthenticated={isAuthenticated}
           path="/dashboard"
+          isAuthenticated={Boolean(authUser?.user?.token)}
           component={Dashboard}
         />
         <Route exact path="/login" component={Login} />
