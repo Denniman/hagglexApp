@@ -54,6 +54,9 @@ const Routing = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/verify-user" component={VerifyUser} />
+        <Route exact path="/">
+          <Redirect to="/login" />
+        </Route>
       </Switch>
     </Router>
   );

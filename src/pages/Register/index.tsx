@@ -26,7 +26,13 @@ const REGISTER = gql`
 `;
 
 const Register = () => {
-  const [register, { data, loading, error }] = useMutation(REGISTER);
+  const [isError, setisError] = useState({});
+
+  const [register, { data, loading, error }] = useMutation(REGISTER, {
+    onError: (err) => {
+      setisError(err);
+    },
+  });
 
   const history = useHistory();
   const [values, setValues] = useState({
@@ -53,15 +59,12 @@ const Register = () => {
     if (!error && data) {
       history.push('/verify-user');
     }
-
-    if (error) {
-      console.log('error');
-    }
   }, [history, data, error]);
 
   return (
     <Layout>
       <Form onSubmit={handleSubmit}>
+        <h2>{!isError && <h2>Error occured</h2>}</h2>
         <h2>Create new account</h2>
         <div className="form--control first">
           <InputEmail

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { gql, useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import { InputNumber } from '../../components/Input';
@@ -23,7 +24,12 @@ const VERIFY = gql`
 const VerifyUser = () => {
   const history = useHistory();
   const [code, setCode] = useState('');
-  const [verify, { data, loading, error }] = useMutation(VERIFY);
+  const [iserror, setisError] = useState({});
+  const [verify, { data, loading, error }] = useMutation(VERIFY, {
+    onError: (err) => {
+      setisError(err);
+    },
+  });
 
   const authUser = useContext(AppContext);
 
@@ -34,6 +40,10 @@ const VerifyUser = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    if (code.trim() === '') {
+      return;
+    }
     verify({ variables: { payload: { code: Number(code) } } });
   };
 
@@ -44,12 +54,22 @@ const VerifyUser = () => {
     }
 
     if (error) {
+      toast('An Error occorued. Try Again', {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }, [authUser, history, data, error]);
 
   return (
     <Layout>
       <Form onSubmit={handleSubmit}>
+        {!iserror && <h2>Error occured</h2>}
         <h2>Please verify your account</h2>
         <p>Supply the code sent to your email address</p>
 

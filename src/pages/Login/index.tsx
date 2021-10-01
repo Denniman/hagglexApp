@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import { InputEmail, InputPassword } from '../../components/Input';
@@ -27,9 +28,15 @@ const Login = () => {
 
   const authuser = useContext(AppContext);
 
+  const [isError, setisError] = useState({});
+
   const history = useHistory();
 
-  const [login, { data, loading, error }] = useMutation(LOGIN);
+  const [login, { data, loading, error }] = useMutation(LOGIN, {
+    onError: (err) => {
+      setisError(err);
+    },
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
@@ -38,6 +45,19 @@ const Login = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (values.password.trim() === '' || values.email.trim() === '') {
+      toast('Invalid input', {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
     login({
       variables: {
         payload: { password: values.password, input: values.email },
@@ -50,15 +70,12 @@ const Login = () => {
       authuser?.handleUserAuth(data.login);
       history.push('/dashboard');
     }
-
-    if (error) {
-      console.log('error occured');
-    }
   }, [authuser, history, data, error]);
 
   return (
     <Layout>
       <Form onSubmit={handleSubmit}>
+        {!isError && <h3>Error ocured</h3>}
         <h2>Welcome Back</h2>
         <div className="form--control first">
           <InputEmail
