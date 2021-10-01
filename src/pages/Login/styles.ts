@@ -5,7 +5,7 @@ export const Form = styled.form`
   background-color: #fff;
   border-radius: 0.7rem;
   padding: 8rem 5rem;
-  margin: 0;
+  margin-top: 3rem;
   @media (min-width: 768px) {
     margin: 5rem;
   }
