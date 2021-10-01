@@ -1,50 +1,67 @@
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
-import {
-  DPIconBell,
-  DPIconDropDown,
-  DPIconNewWallet,
-  IconAlertBell,
-} from '../../assets/icons';
+import { Link } from 'react-router-dom';
+import PolyGon from '../../assets/images/Polygon.png';
+import BellIcon from '../../assets/images/bell.png';
+import { SidebarContext } from '../../context';
 
 const Header = () => {
+  const [show, SetShow] = useState(false);
+
+  const toggleSidebar = useContext(SidebarContext);
+
+  const toggleShow = () => {
+    SetShow((prev) => !prev);
+  };
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <div className="harmbuggermenu--wrapper">
+        <div
+          className="harmbuggermenu--wrapper"
+          onClick={toggleSidebar?.handleSidebar}
+        >
           <div className="harmbuggermenu--wrapper_menu"></div>
           <div className="harmbuggermenu--wrapper_menu"></div>
           <div className="harmbuggermenu--wrapper_menu"></div>
         </div>
       </HeaderContainer>
       <div className="header--wrapper">
-        {/* <DPIconBell className="icon" /> */}
-        <IconAlertBell className="icon" />
+        <img src={BellIcon} alt="" className="icon" />
 
         <div className="username">WO</div>
 
         <Text>Wills Omaer</Text>
-        <DPIconDropDown className="icon-dropdown" />
+        <div className="icon-dropdown" onClick={toggleShow}>
+          <img src={PolyGon} alt="" className="polygon" />
+        </div>
+        <div className={`${show ? 'showPolygon' : 'hidePolygon'} sidebar`}>
+          <ul>
+            <Link to="/login" className="link">
+              <li>Log Out</li>
+            </Link>
+          </ul>
+        </div>
       </div>
     </HeaderWrapper>
   );
 };
 
 const HeaderWrapper = styled.header`
-  /* padding: 0.5rem 1rem; */
   width: 100%;
   height: 8rem;
   background-color: #fff;
-  /* display: flex; */
+  display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.05);
 
   .icon {
-    width: 2.5rem;
+    width: 2.7rem;
+    margin-right: 2rem;
   }
 
-  .icon-dropdown {
-    width: 1.3rem;
+  .polygon {
+    width: 1.7rem;
   }
 
   .header--wrapper {
@@ -53,6 +70,7 @@ const HeaderWrapper = styled.header`
     align-items: center;
     gap: 1rem;
     margin: 0 2rem;
+    flex-basis: 95%;
   }
 
   .username {
@@ -63,7 +81,47 @@ const HeaderWrapper = styled.header`
     height: 3rem;
     padding: 1rem;
     border-radius: 50%;
+    background: #ece5ff;
     border: 2px solid #2e1963;
+  }
+
+  .icon-dropdown {
+    width: 1.6rem;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .hidePolygon {
+    display: none;
+  }
+
+  .showPolygon {
+    position: absolute;
+    right: 20px;
+    top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 0.7rem;
+    width: 13rem;
+    height: 10rem;
+    box-shadow: 0px 4px 13px rgba(0, 0, 0, 0.05);
+  }
+
+  ul {
+    font-size: 1.5rem;
+    list-style: none;
+    font-weight: 500;
+
+    li {
+      padding: 0.7rem 1rem;
+    }
+  }
+
+  .link {
+    text-decoration: none;
+    color: #000;
   }
 `;
 
@@ -81,6 +139,7 @@ const HeaderContainer = styled.div`
   .harmbuggermenu--wrapper {
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     &_menu {
       width: 25px;
       height: 3px;

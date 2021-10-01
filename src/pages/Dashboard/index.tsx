@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import DashboardLayout from '../../components/Layout/DashboardLayout';
 import PagesLayout from '../../components/Layout/PageLayout';
-import YellowHeaderImg from '../../assets/images/yellowheader.png';
-import WalletList from '../../components/WalletList';
+import WalletList, {
+  WalletListOne,
+  WalletListTwo,
+} from '../../components/WalletList';
 import BTCLogo from '../../assets/images/btc.png';
 import DownLoadLogo from '../../assets/images/downLoad.png';
 import { InputTextDashboard } from '../../components/Input';
@@ -31,29 +33,38 @@ const Dashboard: React.FC = () => {
         </AssertBar>
 
         <Container>
-          <div className="card">
-            <div className="card--line">
-              <div className="card--wallet">
-                <div className="card--wallet_header">
-                  <WalletText>Wallet</WalletText>
+          <FlexTransactions>
+            <div className="card">
+              <div className="card--line">
+                <div className="card--wallet">
+                  <div className="card--wallet_header">
+                    <WalletText>Wallet</WalletText>
 
-                  <div className="card--wallet_list">
-                    <div className="list">List</div>
-                    Stats
+                    <div className="card--wallet_list">
+                      <div className="list">List</div>
+                      Stats
+                    </div>
                   </div>
-                </div>
 
-                <TabsHeader>
-                  <p className="active tab">FLEX</p>
-                  <p className="tab">VAULT</p>
-                </TabsHeader>
+                  <TabsHeader>
+                    <p className="active tab">FLEX</p>
+                    <p className="tab">VAULT</p>
+                  </TabsHeader>
+                </div>
+              </div>
+
+              <div className="card--botto">
+                <WalletListOne />
               </div>
             </div>
 
             <div className="card--bottom">
+              <WalletListTwo />
+            </div>
+            <div className="card">
               <WalletList />
             </div>
-          </div>
+          </FlexTransactions>
 
           <WalletTransactions>
             <div className="card--balance">
@@ -148,9 +159,6 @@ const AssertBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-position: cover; */
-  /* background-repeat: no-repeat; */
-  /* background: url(${YellowHeaderImg}) no-repeat center; */
   background-position: center;
   border-radius: 0.5rem;
   background: linear-gradient(to right, #fcd7a2, #ffc175);
@@ -222,21 +230,24 @@ const Container = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
   }
+`;
+
+const FlexTransactions = styled.div`
+  height: 100%;
+  flex-basis: 50%;
 
   .card {
-    height: 100%;
-    flex-basis: 50%;
+    padding: 5rem 3rem 1rem;
     background-color: #fff;
     border-radius: 0.5rem;
-    margin-bottom: 3rem;
     &--wallet {
-      padding: 3rem 3rem 0;
+      /* padding: 3rem 3rem 0; */
 
       &_header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
 
       &_list {
@@ -255,7 +266,7 @@ const Container = styled.div`
     }
 
     &--bottom {
-      padding: 3rem 3rem 0;
+      padding: 0 3rem 0;
     }
   }
 
@@ -272,7 +283,6 @@ const Container = styled.div`
     border-bottom: 2px solid #f4f5f9;
   }
 `;
-
 const WalletTransactions = styled.div`
   height: 100%;
   flex-basis: 50%;
@@ -289,8 +299,6 @@ const WalletTransactions = styled.div`
       gap: 1.5rem;
       padding: 2rem;
       height: 10rem;
-      /* background: url(${YellowHeaderImg}) no-repeat center;
-      background-position: center; */
       background: linear-gradient(to right, #fcd7a2, #ffc175);
       border-radius: 0.5rem;
     }

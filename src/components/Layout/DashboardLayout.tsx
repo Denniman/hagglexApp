@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-// import { SidebarContext } from '../../../context';
+import { SidebarContext } from '../../context';
 import Sidebar from '../../components/SideBar';
 
 const DashboardLayout: React.FC = ({ children }) => {
-  //   const toggleSidebar = useContext(SidebarContext);
-  const toggleSidebar = 'Fake';
+  const toggleSidebar = useContext(SidebarContext);
+
   return (
     <DashboardContainer>
       <Sidebar
-        className={`${toggleSidebar ? 'show' : 'hide'} sidebar`}
-        // closeSideBar={toggleSidebar?.handleSidebar}
+        className={`${toggleSidebar?.sidebar ? 'show' : 'hide'} sidebar`}
+        closeSideBar={toggleSidebar?.handleSidebar}
       />
 
       <DashboardContentWrapper>
@@ -33,7 +33,7 @@ const DashboardContainer = styled.div`
   }
 
   .show {
-    transform: translateX(0%);
+    transform: translateX(40%);
     transition: ease-in-out 0.5s;
   }
 
@@ -52,9 +52,6 @@ const DashboardContentWrapper = styled.div`
 `;
 
 const DashboardContent = styled.div`
-  width: 100%;
-
-  /* padding: 7px 5px 30px; */
   width: 100%;
   height: calc(100% - 6rem);
 `;

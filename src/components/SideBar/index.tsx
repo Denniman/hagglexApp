@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import Logo from '../../assets/images/logo.png';
 
 import {
   IconSavings,
@@ -8,7 +9,6 @@ import {
   IconMore,
   IconSupport,
   IconWallet,
-  DPIconNewLogo,
   DPIconNewWallet,
   DPIconClose,
 } from '../../assets/icons';
@@ -24,8 +24,10 @@ const Sidebar: React.FC<SideBarI> = ({ className, closeSideBar }) => {
       <LinksWrapper>
         <div className="logo-wrapper">
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <DPIconNewLogo className="icon logo" />
-            <LogoText>HaggleX</LogoText>
+            <img src={Logo} alt="" className="icon logo" />
+            <LogoText>
+              Haggle<span>X</span>
+            </LogoText>
           </div>
           <DPIconClose className="close" onClick={closeSideBar} />
         </div>
@@ -44,7 +46,7 @@ const Sidebar: React.FC<SideBarI> = ({ className, closeSideBar }) => {
         </NavLink>
 
         <NavLink
-          to="/dashboard/policies"
+          to="/dashboard/wallet"
           className="nav-link"
           activeClassName="active"
           onClick={closeSideBar}
@@ -56,7 +58,7 @@ const Sidebar: React.FC<SideBarI> = ({ className, closeSideBar }) => {
           </div>
         </NavLink>
         <NavLink
-          to="/dashboard/claim"
+          to="/dashboard/otc"
           className={`nav-link divider`}
           style={{ position: 'relative' }}
           activeClassName="active"
@@ -70,7 +72,7 @@ const Sidebar: React.FC<SideBarI> = ({ className, closeSideBar }) => {
         </NavLink>
 
         <NavLink
-          to="/dashboard/manage-policies"
+          to="/dashboard/savings"
           className={`nav-link divider`}
           style={{ position: 'relative' }}
           activeClassName="active"
@@ -84,7 +86,7 @@ const Sidebar: React.FC<SideBarI> = ({ className, closeSideBar }) => {
         </NavLink>
 
         <NavLink
-          to="/dashboard/history"
+          to="/dashboard/more"
           className={`nav-link divider`}
           style={{ position: 'relative' }}
           activeClassName="active"
@@ -98,7 +100,7 @@ const Sidebar: React.FC<SideBarI> = ({ className, closeSideBar }) => {
         </NavLink>
 
         <NavLink
-          to="/dashboard/help"
+          to="/dashboard/support"
           className={`nav-link divider`}
           style={{ position: 'relative' }}
           activeClassName="active"
@@ -121,7 +123,6 @@ const SidebarWapper = styled.nav`
   background: #fff;
   position: absolute;
   z-index: 5;
-  display: none;
 
   .logo-wrapper {
     margin-bottom: 4rem;
@@ -132,14 +133,16 @@ const SidebarWapper = styled.nav`
     align-items: center;
   }
 
-  .icon {
-    width: 5rem;
+  .close {
+    display: block;
+    @media (min-width: 768px) {
+      display: none;
+    }
   }
 
-  .logo {
-    path {
-      /* fill: #2e1963; */
-    }
+  .icon {
+    width: 4rem;
+    margin-right: 1rem;
   }
 
   @media (min-width: 768px) {
@@ -224,6 +227,9 @@ const LogoText = styled.p`
   font-size: 1.4rem;
   font-weight: 700;
   color: #2e1963;
+  span {
+    font-size: 1.7rem;
+  }
 `;
 
 export default Sidebar;

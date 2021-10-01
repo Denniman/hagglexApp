@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import SideBarContextProvider from './context';
+
+const client = new ApolloClient({
+  uri: 'https://api-staging.hagglex.com/graphql',
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SideBarContextProvider>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </SideBarContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

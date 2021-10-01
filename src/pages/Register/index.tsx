@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import {
   InputEmail,
@@ -10,33 +11,52 @@ import {
 } from '../../components/Input';
 import Button from '../../components/Button';
 
-const SignUp = () => {
+const REGISTER = gql`
+  mutation register($payload: CreateUserInput!) {
+    register(data: $payload) {
+      user {
+        _id
+        email
+        username
+        phonenumber
+      }
+      token
+    }
+  }
+`;
+
+const Register = () => {
+  const [register, { data, loading, error }] = useMutation(REGISTER);
+
+  const history = useHistory();
   const [values, setValues] = useState({
     email: '',
     password: '',
     phonenumber: '',
     username: '',
+    country: 'NG',
+    currency: 'Naira',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
-    setValues((values: any) => ({
-      ...values,
-      [e.target.name]: e.target.value,
-    }));
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const userData = {
-      email: values.email,
-      password: values.password,
-      phonenumber: values.phonenumber,
-      username: values.username,
-    };
 
-    console.log(userData);
+    register({ variables: { payload: { ...values } } });
   };
+
+  useEffect(() => {
+    if (!error && data) {
+      console.log(data);
+      history.push('/verify-user');
+    } else {
+      console.log('error occured', error);
+    }
+  }, [history, data, error]);
 
   return (
     <Layout>
@@ -86,7 +106,7 @@ const SignUp = () => {
           <Text>Got referral code?</Text>
         </div>
         <div className="button--wrapper">
-          <Button text="SIGN UP" />
+          <Button text={loading ? 'Loading...' : 'SIGN UP'} />
         </div>
 
         <div className="newuser">
@@ -169,4 +189,4 @@ const TextSecondary = styled.p`
   font-size: 1.3rem;
 `;
 
-export default SignUp;
+export default Register;

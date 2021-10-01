@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { IconNigeria } from '../../assets/icons';
 
@@ -48,6 +49,31 @@ export const InputTextDashboard: React.FC<InputTextProps> = ({
       </label>
       <input
         type="text"
+        placeholder={placeholder}
+        className="input"
+        id={id}
+        onChange={onChange}
+        name={name}
+        required={required}
+      />
+    </DasboardWrapper>
+  );
+};
+export const InputNumber: React.FC<InputTextProps> = ({
+  id,
+  placeholder,
+  label,
+  onChange,
+  name,
+  required,
+}) => {
+  return (
+    <DasboardWrapper>
+      <label className="dashboardlabel" htmlFor={id}>
+        {label}
+      </label>
+      <input
+        type="number"
         placeholder={placeholder}
         className="input"
         id={id}
@@ -125,7 +151,7 @@ export const PhoneNumberInput: React.FC<InputTextProps> = ({
           <h3>(+234)</h3>
         </div>
         <input
-          type="number"
+          type="text"
           placeholder={placeholder}
           className="input"
           id={id}
@@ -173,6 +199,7 @@ const NumberContainer = styled.div`
     }
   }
 `;
+
 const DasboardWrapper = styled.div`
   display: flex;
   flex-direction: column;
