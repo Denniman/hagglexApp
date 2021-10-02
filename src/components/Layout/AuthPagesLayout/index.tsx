@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-// import LoginImg from '../../assets/images/login-img.png';
 import LoginImg from '../../../assets/images/login-img.png';
 import { IconBack, IconForward } from '../../../assets/icons';
 import {
