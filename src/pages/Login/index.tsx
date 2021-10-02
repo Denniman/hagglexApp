@@ -61,7 +61,7 @@ const Login = () => {
       authuser?.handleUserAuth(data.login);
       history.push('/dashboard');
     }
-  }, [authuser, history, data, error]);
+  }, [authuser, history, data, error, isError]);
 
   return (
     <Layout>

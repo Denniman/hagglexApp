@@ -53,7 +53,7 @@ const VerifyUser = () => {
       authUser?.handleUserAuth(data.login);
       history.push('/dashboard');
     }
-  }, [authUser, history, data, error]);
+  }, [authUser, history, data, error, iserror]);
 
   return (
     <Layout>

@@ -60,7 +60,7 @@ const Register = () => {
     if (!error && data) {
       history.push('/verify-user');
     }
-  }, [history, data, error]);
+  }, [history, data, error, isError]);
 
   return (
     <Layout>
