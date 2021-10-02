@@ -1,14 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import {
-  BTCIconGreen,
-  DogeIcon,
-  EthereumIcon,
-  DashIcon,
-  HaggleIcon,
-  BTCIconYellow,
-  LitecoinIcon,
-} from '../../assets/icons';
+import { Container, Text, TitleText } from './styles';
 
 interface WalletItemProps {
   title: string;
@@ -17,16 +8,6 @@ interface WalletItemProps {
   nairaAmount: string;
   svg: any;
 }
-
-export const IconsData = [
-  BTCIconGreen,
-  DogeIcon,
-  EthereumIcon,
-  DashIcon,
-  HaggleIcon,
-  BTCIconYellow,
-  LitecoinIcon,
-];
 
 const WalletItem: React.FC<WalletItemProps> = ({
   title,
@@ -65,23 +46,5 @@ const WalletItem: React.FC<WalletItemProps> = ({
     </li>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-`;
-
-const TitleText = styled.p`
-  font-size: 1.4rem;
-  font-weight: 500;
-`;
-
-const Text = styled.p`
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #2e1963;
-`;
 
 export default WalletItem;

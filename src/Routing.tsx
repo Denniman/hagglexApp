@@ -15,7 +15,7 @@ import { AppContext } from './context';
 type FF = {
   isAuthenticated: boolean;
   component: any;
-  exact?: boolean;
+  exact: boolean;
   path: string;
 };
 const PrivateRoute: React.FC<FF> = ({

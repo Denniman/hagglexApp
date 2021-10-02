@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import WalletItem from '../WalletItem';
 import BTCGreen from '../../assets/images/btcgreen.png';
 import BTCIcon from '../../assets/images/btc.png';
@@ -8,6 +7,7 @@ import Ethereum from '../../assets/images/ethereum.png';
 import Litecoin from '../../assets/images/litecoin.png';
 import UDT from '../../assets/images/udt.png';
 import Doge from '../../assets/images/doge.png';
+import { Container } from './styles';
 
 const data = [
   {
@@ -131,17 +131,5 @@ export const WalletListTwo = () => {
     </Container>
   );
 };
-
-const Container = styled.ul`
-  list-style: none;
-
-  .divider {
-    background-color: #f2f5f4;
-  }
-
-  .icon {
-    width: 5rem;
-  }
-`;
 
 export default WalletList;

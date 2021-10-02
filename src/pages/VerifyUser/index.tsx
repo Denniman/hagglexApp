@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { gql, useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Button from '../../components/Button';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/AuthPagesLayout';
 import { InputNumber } from '../../components/Input';
 import { AppContext } from '../../context';
+
+import { Form } from './styles';
 
 const VERIFY = gql`
   mutation verifyUser($payload: VerifyUserInput!) {
@@ -89,24 +90,5 @@ const VerifyUser = () => {
     </Layout>
   );
 };
-
-const Form = styled.form`
-  padding: 2rem;
-  margin: 10rem auto;
-  h2,
-  p {
-    color: #fff;
-    text-align: center;
-    font-size: 1.4rem;
-  }
-
-  .form--control {
-    margin: 3rem 0;
-  }
-
-  .btn {
-    padding: 1.7rem;
-  }
-`;
 
 export default VerifyUser;

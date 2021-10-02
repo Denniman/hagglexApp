@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Button from '../../components/Button';
-import Layout from '../../components/Layout';
+import Layout from '../../components/Layout/AuthPagesLayout';
 import { InputEmail, InputPassword } from '../../components/Input';
 import { AppContext } from '../../context';
 
