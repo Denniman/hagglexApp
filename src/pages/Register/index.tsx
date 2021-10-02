@@ -10,6 +10,7 @@ import {
 } from '../../components/Input';
 import Button from '../../components/Button';
 import { Form, LinkText, Text, TextSecondary } from './styles';
+import ErrorModal from '../../components/ErrorModal';
 
 const REGISTER = gql`
   mutation register($payload: CreateUserInput!) {
@@ -64,7 +65,9 @@ const Register = () => {
   return (
     <Layout>
       <Form onSubmit={handleSubmit}>
-        <h2>{!isError && <h2>Error occured</h2>}</h2>
+        {error?.graphQLErrors.map(({ message }, i) => (
+          <ErrorModal key={i} text={message} />
+        ))}
         <h2>Create new account</h2>
         <div className="form--control first">
           <InputEmail

@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
-import { toast } from 'react-toastify';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout/AuthPagesLayout';
 import { InputNumber } from '../../components/Input';
 import { AppContext } from '../../context';
+import ErrorModal from '../../components/ErrorModal';
 
 import { Form } from './styles';
 
@@ -53,24 +53,14 @@ const VerifyUser = () => {
       authUser?.handleUserAuth(data.login);
       history.push('/dashboard');
     }
-
-    if (error) {
-      toast('An Error occorued. Try Again', {
-        position: 'bottom-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
   }, [authUser, history, data, error]);
 
   return (
     <Layout>
       <Form onSubmit={handleSubmit}>
-        {!iserror && <h2>Error occured</h2>}
+        {error?.graphQLErrors.map(({ message }, i) => (
+          <ErrorModal key={i} text={message} />
+        ))}
         <h2>Please verify your account</h2>
         <p>Supply the code sent to your email address</p>
 

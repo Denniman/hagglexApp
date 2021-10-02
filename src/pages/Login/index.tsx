@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
-import { toast } from 'react-toastify';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout/AuthPagesLayout';
 import { InputEmail, InputPassword } from '../../components/Input';
 import { AppContext } from '../../context';
+import ErrorModal from '../../components/ErrorModal';
 
 import { Form, Text, LinkText, TextSecondary } from './styles';
 
@@ -46,15 +46,6 @@ const Login = () => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (values.password.trim() === '' || values.email.trim() === '') {
-      toast('Invalid input', {
-        position: 'bottom-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
       return;
     }
 
@@ -75,7 +66,9 @@ const Login = () => {
   return (
     <Layout>
       <Form onSubmit={handleSubmit}>
-        {!isError && <h3>Error ocured</h3>}
+        {error?.graphQLErrors.map(({ message }, i) => (
+          <ErrorModal key={i} text={message} />
+        ))}
         <h2>Welcome Back</h2>
         <div className="form--control first">
           <InputEmail
