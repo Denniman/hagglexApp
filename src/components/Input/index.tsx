@@ -169,8 +169,9 @@ const NumberContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0.4rem;
     width: 10rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.7rem;
     background-color: #f2ecff;
     border-radius: 0.3rem;
   }
@@ -178,6 +179,8 @@ const NumberContainer = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.87rem;
   }
   .label {
     font-size: 1.6rem;
