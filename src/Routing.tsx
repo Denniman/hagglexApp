@@ -30,9 +30,7 @@ const PrivateRoute: React.FC<FF> = ({
         return isAuthenticated ? (
           <Component {...props} {...routerProps} />
         ) : (
-          <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }}
-          />
+          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
         );
       }}
     />
@@ -51,12 +49,9 @@ const Routing = () => {
           isAuthenticated={Boolean(userAuth?.userAuth())}
           component={Dashboard}
         />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/verify-user" component={VerifyUser} />
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
       </Switch>
     </Router>
   );

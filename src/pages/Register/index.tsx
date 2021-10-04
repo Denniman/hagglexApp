@@ -118,7 +118,7 @@ const Register = () => {
 
         <div className="newuser">
           <TextSecondary>Have an account?</TextSecondary>
-          <LinkText to="/login"> Sign in to explore</LinkText>
+          <LinkText to="/"> Sign in to explore</LinkText>
         </div>
 
         <div className="privacy">
