@@ -50,7 +50,7 @@ const VerifyUser = () => {
 
   useEffect(() => {
     if (!error && data) {
-      authUser?.handleUserAuth(data.login);
+      authUser?.userLogin(data.login);
       history.push('/dashboard');
     }
   }, [authUser, history, data, error, iserror]);

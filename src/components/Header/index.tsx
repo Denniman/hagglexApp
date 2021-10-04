@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import PolyGon from '../../assets/images/Polygon.png';
 import BellIcon from '../../assets/images/bell.png';
 import { AppContext } from '../../context';
+import { DPIconLogout } from '../../assets/icons';
 
-import { HeaderContainer, HeaderWrapper, Text } from './styles';
+import { HeaderContainer, HeaderWrapper, Text, Logout } from './styles';
 
 const Header = () => {
   const [show, SetShow] = useState(false);
@@ -13,6 +13,11 @@ const Header = () => {
 
   const toggleShow = () => {
     SetShow((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   };
   return (
     <HeaderWrapper>
@@ -36,11 +41,10 @@ const Header = () => {
           <img src={PolyGon} alt="" className="polygon" />
         </div>
         <div className={`${show ? 'showPolygon' : 'hidePolygon'} sidebar`}>
-          <ul>
-            <Link to="/login" className="link">
-              <li>Log Out</li>
-            </Link>
-          </ul>
+          <Logout onClick={handleLogout}>
+            <DPIconLogout />
+            Log Out
+          </Logout>
         </div>
       </div>
     </HeaderWrapper>

@@ -22,3 +22,4 @@ export { ReactComponent as BTCIconYellow } from './svg/btcyellow.svg';
 export { ReactComponent as LitecoinIcon } from './svg/litecoin.svg';
 export { ReactComponent as DPIconDownload } from './svg/downloadupload.svg';
 export { ReactComponent as DPIconAlert } from './svg/alert.svg';
+export { ReactComponent as DPIconLogout } from './svg/logout.svg';

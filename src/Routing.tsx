@@ -40,7 +40,7 @@ const PrivateRoute: React.FC<FF> = ({
 };
 
 const Routing = () => {
-  const authUser = useContext(AppContext);
+  const userAuth = useContext(AppContext);
 
   return (
     <Router>
@@ -48,7 +48,7 @@ const Routing = () => {
         <PrivateRoute
           exact
           path="/dashboard"
-          isAuthenticated={Boolean(authUser?.user?.token)}
+          isAuthenticated={Boolean(userAuth?.userAuth())}
           component={Dashboard}
         />
         <Route exact path="/login" component={Login} />

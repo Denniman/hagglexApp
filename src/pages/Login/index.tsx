@@ -58,7 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     if (!error && data) {
-      authuser?.handleUserAuth(data.login);
+      authuser?.userLogin(data.login);
       history.push('/dashboard');
     }
   }, [authuser, history, data, error, isError]);

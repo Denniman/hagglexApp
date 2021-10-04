@@ -4,7 +4,8 @@ type ContextProps = {
   sidebar: boolean;
   handleSidebar: () => void;
   user: { token: string };
-  handleUserAuth: (data: object) => void;
+  userLogin: (data: object) => void;
+  userAuth: () => void;
 };
 
 interface PropType {
@@ -21,11 +22,24 @@ const AppContextProvider: React.FC<PropType> = ({ children }) => {
     setShowSidebar(!showSidebar);
   };
 
-  const handleUserAuth = (data: object) => setUser({ ...user, ...data });
+  const userLogin = (data: object) => {
+    localStorage.setItem('token', JSON.stringify(data));
+    setUser({ ...user, ...data });
+  };
+
+  const userAuth = () => {
+    return localStorage.getItem('token');
+  };
 
   return (
     <AppContext.Provider
-      value={{ sidebar: showSidebar, handleSidebar, user, handleUserAuth }}
+      value={{
+        sidebar: showSidebar,
+        handleSidebar,
+        user,
+        userLogin,
+        userAuth,
+      }}
     >
       {children}
     </AppContext.Provider>

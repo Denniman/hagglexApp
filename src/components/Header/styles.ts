@@ -106,3 +106,12 @@ export const HeaderContainer = styled.div`
     display: none;
   }
 `;
+
+export const Logout = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  gap: 1rem;
+  cursor: pointer;
+`;
