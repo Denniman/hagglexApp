@@ -10,6 +10,8 @@ The password reset does not work at this moment due to some authorization respon
 password: 12345678
 Email: anakate@yopmail.com
 
+This project is also hosted on heroku. [Click to view the live link](https://hagglexapp.herokuapp.com/).
+
 ## Available Scripts
 
 In the project directory, you can run:
